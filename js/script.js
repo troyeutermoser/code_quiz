@@ -1,3 +1,7 @@
+var renderedQuestion = document.getElementById("render-question")
+
+var renderedChoices = document.getElementById("choices")
+
 var startButton = document.querySelector(".start-button");
 
 var questionsElement = document.querySelector(".questions");
@@ -15,22 +19,36 @@ var questions = [
         choice: ["alertBox(Hello World);", "alert(Hello World);", "msgBox(Hello World);", "msg(Hello World);"],
         answer: "alert(Hello World);"
     },
-   
+    
 ]
+
+
+
+
+var questionsIndex = 0;
 var correctAnswers = 0;
 var wrongAnswers = 0;
 var timer;
 var timerCount;
 var isWin = false;
+
 function renderQuestions() {
     timerCount = 10
-    for (var i = 0; i < questions.length; i++) {
-        var questionDiv = document.createElement("div");
-        questionDiv.innerHTML = questions[i].question;
-        questionsElement.appendChild(questionDiv)
-        console.log("hello");
-      }
+renderedQuestion.innerHTML = questions[questionsIndex].question;
+var choices = questions[questionsIndex].choice;
+
+for (var i = 0; i < choices.length; i++) {
+  var selected = document.createElement("button");
+  selected.textContent = choices[i];
+  renderedChoices.appendChild(selected);
+  console.log("hello answer");
 }
+    
+}
+// function nextQuestion
+// increase questionsIndex++
+// check that questionsIndex === questions.length then the timer = 0
+// call renderQuestions
 
 function startTimer() {
     // Sets timer
