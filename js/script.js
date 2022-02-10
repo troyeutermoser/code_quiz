@@ -34,7 +34,7 @@ var timerCount;
 var isWin = false;
 
 function renderQuestions() {
-  timerCount = 10;
+  timerCount = 30;
   renderedQuestion.innerHTML = questions[questionsIndex].question;
   var choices = questions[questionsIndex].choice;
 
@@ -72,7 +72,22 @@ function startTimer() {
   }, 1000);
 }
 function startQuiz() {
+  startButton.disabled = true
   renderQuestions();
   startTimer();
 }
+function checkAnswer(event) {
+  if (event.target.matches("button")) {
+    var userAnswer = event.target.textContent;
+    if (userAnswer === questions[questionsIndex].answer) {
+      correctAnswers++;
+      console.log(correctAnswers)
+    } else {
+      wrongAnswers++;
+      console.log(wrongAnswers);
+      timerCount--;
+    }
+  }
+}
 startButton.addEventListener("click", startQuiz);
+renderedChoices.addEventListener("click", checkAnswer)
